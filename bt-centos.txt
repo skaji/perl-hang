@@ -1,0 +1,129 @@
+===> uname -a
+Linux tk2-223-21305.vs.sakura.ne.jp 2.6.32-504.16.2.el6.x86_64 #1 SMP Wed Apr 22 06:48:29 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux
+
+===> perl -V
+Summary of my perl5 (revision 5 version 20 subversion 2) configuration:
+
+  Platform:
+    osname=linux, osvers=2.6.32-504.16.2.el6.x86_64, archname=x86_64-linux
+    uname='linux tk2-223-21305.vs.sakura.ne.jp 2.6.32-504.16.2.el6.x86_64 #1 smp wed apr 22 06:48:29 utc 2015 x86_64 x86_64 x86_64 gnulinux '
+    config_args='-de -Dman1dir=none -Dman3dir=none -DDEBUGGING=-g -Dprefix=/home/skaji/g5.20.2 -Aeval:scriptdir=/home/skaji/g5.20.2/bin'
+    hint=recommended, useposix=true, d_sigaction=define
+    useithreads=undef, usemultiplicity=undef
+    use64bitint=define, use64bitall=define, uselongdouble=undef
+    usemymalloc=n, bincompat5005=undef
+  Compiler:
+    cc='cc', ccflags ='-fwrapv -fno-strict-aliasing -pipe -fstack-protector -I/usr/local/include -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    optimize='-O2 -g',
+    cppflags='-fwrapv -fno-strict-aliasing -pipe -fstack-protector -I/usr/local/include'
+    ccversion='', gccversion='4.4.7 20120313 (Red Hat 4.4.7-11)', gccosandvers=''
+    intsize=4, longsize=8, ptrsize=8, doublesize=8, byteorder=12345678
+    d_longlong=define, longlongsize=8, d_longdbl=define, longdblsize=16
+    ivtype='long', ivsize=8, nvtype='double', nvsize=8, Off_t='off_t', lseeksize=8
+    alignbytes=8, prototype=define
+  Linker and Libraries:
+    ld='cc', ldflags =' -fstack-protector -L/usr/local/lib'
+    libpth=/usr/local/lib /usr/lib /lib/../lib64 /usr/lib/../lib64 /lib /lib64 /usr/lib64 /usr/local/lib64
+    libs=-lnsl -ldl -lm -lcrypt -lutil -lc
+    perllibs=-lnsl -ldl -lm -lcrypt -lutil -lc
+    libc=libc-2.12.so, so=so, useshrplib=false, libperl=libperl.a
+    gnulibc_version='2.12'
+  Dynamic Linking:
+    dlsrc=dl_dlopen.xs, dlext=so, d_dlsymun=undef, ccdlflags='-Wl,-E'
+    cccdlflags='-fPIC', lddlflags='-shared -O2 -g -L/usr/local/lib -fstack-protector'
+
+
+Characteristics of this binary (from libperl):
+  Compile-time options: HAS_TIMES PERLIO_LAYERS PERL_DONT_CREATE_GVSV
+                        PERL_HASH_FUNC_ONE_AT_A_TIME_HARD PERL_MALLOC_WRAP
+                        PERL_NEW_COPY_ON_WRITE PERL_PRESERVE_IVUV
+                        USE_64_BIT_ALL USE_64_BIT_INT USE_LARGE_FILES
+                        USE_LOCALE USE_LOCALE_COLLATE USE_LOCALE_CTYPE
+                        USE_LOCALE_NUMERIC USE_PERLIO USE_PERL_ATOF
+  Built under linux
+  Compiled at May 30 2015 11:03:16
+  @INC:
+    /home/skaji/g5.20.2/lib/perl5/site_perl/5.20.2/x86_64-linux
+    /home/skaji/g5.20.2/lib/perl5/site_perl/5.20.2
+    /home/skaji/g5.20.2/lib/perl5/5.20.2/x86_64-linux
+    /home/skaji/g5.20.2/lib/perl5/5.20.2
+    .
+
+===> gdb --batch -p 8916 -x gdb-command.txt
+[Thread debugging using libthread_db enabled]
+0x00007fb96b78e05e in __lll_lock_wait_private () from /lib64/libc.so.6
+#0  0x00007fb96b78e05e in __lll_lock_wait_private () from /lib64/libc.so.6
+No symbol table info available.
+#1  0x00007fb96b71316b in _L_lock_9503 () from /lib64/libc.so.6
+No symbol table info available.
+#2  0x00007fb96b7106a6 in malloc () from /lib64/libc.so.6
+No symbol table info available.
+#3  0x000000000048a675 in Perl_safesysmalloc (size=<value optimized out>) at util.c:130
+        ptr = 0xfffffffffffffe00
+#4  0x00000000004b7a28 in Perl_sv_grow (sv=0x16347b0, newlen=10) at sv.c:1593
+        minlen = <value optimized out>
+        s = 0x0
+#5  0x00000000004b4968 in Perl_sv_setsv_flags (dstr=0x16347b0, sstr=0x1410100, flags=<value optimized out>) at sv.c:4524
+        cur = 0
+        len = 10
+        sflags = <value optimized out>
+        dtype = <value optimized out>
+        stype = <value optimized out>
+#6  0x00000000004b56bd in Perl_newSVsv (old=<value optimized out>) at sv.c:9325
+        sv = 0x16347b0
+#7  0x0000000000494ff2 in Perl_sighandler (sig=14, sip=0x7fff073c97b0, uap=0x7fff073c9680) at mg.c:3216
+        sp = 0x1437008
+        gv = 0x0
+        sv = 0x1424678
+        tSv = 0x0
+        cv = 0x1423fa0
+        myop = 0x15c95a0
+        flags = 8
+        tXpv = 0x0
+        old_ss_ix = 362
+        errsv_save = 0x0
+#8  <signal handler called>
+No symbol table info available.
+#9  0x00007fb96b70f17d in _int_malloc () from /lib64/libc.so.6
+No symbol table info available.
+#10 0x00007fb96b7106b1 in malloc () from /lib64/libc.so.6
+No symbol table info available.
+#11 0x000000000048a675 in Perl_safesysmalloc (size=<value optimized out>) at util.c:130
+        ptr = 0x60
+#12 0x00000000004a2650 in Perl_av_extend_guts (av=0x1634780, key=6, maxp=0x16cb400, allocp=0x16cb408, arrayp=<value optimized out>) at av.c:176
+        ary = <value optimized out>
+        tmp = <value optimized out>
+        newmax = 6
+#13 0x00000000004a2bb8 in Perl_av_store (av=0x1634780, key=6, val=0x1634798) at av.c:345
+        ary = <value optimized out>
+#14 0x0000000000465abf in Perl_pad_push (padlist=0x16229d0, depth=36) at pad.c:2352
+        sv = 0x1634798
+        svp = <value optimized out>
+        oldpad = 0x143ba70
+        names_fill = 6
+        newpad = 0x1634780
+        ix = 6
+        names = 0x14454f0
+        av = <value optimized out>
+#15 0x00000000004a54aa in Perl_pp_entersub () at pp_hot.c:2671
+        mark = <value optimized out>
+        padlist = 0x16229d0
+        depth = 36
+        sp = 0x1412c08
+        sv = 0x1448688
+        gv = 0x1
+        cv = 0x161a528
+        cx = 0x14147c0
+        gimme = <value optimized out>
+        hasargs = <value optimized out>
+#16 0x00000000004a36f3 in Perl_runops_standard () at run.c:42
+        op = <value optimized out>
+#17 0x0000000000437fbe in S_run_body (my_perl=<value optimized out>) at perl.c:2451
+No locals.
+#18 perl_run (my_perl=<value optimized out>) at perl.c:2372
+        oldscope = 1
+        ret = <value optimized out>
+        cur_env = {je_prev = 0x785f80, je_buf = {{__jmpbuf = {0, -260357336532482302, 4312160, 140733314801840, 0, 0, 260373256858535682, -260356763274672382}, __mask_was_saved = 0, __saved_mask = {__val = {10, 21036952, 13, 148565664, 1, 0, 0, 4940306, 0, 4312160, 5522368, 4615408, 0, 140434365056680, 0, 0}}}}, je_ret = 3, je_mustcatch = false}
+#19 0x000000000041ce5c in main (argc=2, argv=0x7fff073ca0b8, env=0x7fff073ca0d0) at perlmain.c:114
+        exitstatus = <value optimized out>
+        i = <value optimized out>

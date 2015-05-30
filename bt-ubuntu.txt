@@ -1,0 +1,140 @@
+===> uname -a
+Linux www7395up 3.13.0-35-generic #62-Ubuntu SMP Fri Aug 15 01:58:42 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux
+
+===> perl -V
+Summary of my perl5 (revision 5 version 20 subversion 2) configuration:
+   
+  Platform:
+    osname=linux, osvers=3.13.0-35-generic, archname=x86_64-linux
+    uname='linux www7395up 3.13.0-35-generic #62-ubuntu smp fri aug 15 01:58:42 utc 2014 x86_64 x86_64 x86_64 gnulinux '
+    config_args='-Dprefix=/home/skaji/env/plenv/versions/5.20.2-DDEBUGGING-g -de -Dusedevel -DDEBUGGING=-g -Dman1dir=none -Dman3dir=none -A'eval:scriptdir=/home/skaji/env/plenv/versions/5.20.2-DDEBUGGING-g/bin''
+    hint=recommended, useposix=true, d_sigaction=define
+    useithreads=undef, usemultiplicity=undef
+    use64bitint=define, use64bitall=define, uselongdouble=undef
+    usemymalloc=n, bincompat5005=undef
+  Compiler:
+    cc='cc', ccflags ='-fwrapv -fno-strict-aliasing -pipe -fstack-protector -I/usr/local/include -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    optimize='-O2 -g',
+    cppflags='-fwrapv -fno-strict-aliasing -pipe -fstack-protector -I/usr/local/include'
+    ccversion='', gccversion='4.8.2', gccosandvers=''
+    intsize=4, longsize=8, ptrsize=8, doublesize=8, byteorder=12345678
+    d_longlong=define, longlongsize=8, d_longdbl=define, longdblsize=16
+    ivtype='long', ivsize=8, nvtype='double', nvsize=8, Off_t='off_t', lseeksize=8
+    alignbytes=8, prototype=define
+  Linker and Libraries:
+    ld='cc', ldflags =' -fstack-protector -L/usr/local/lib'
+    libpth=/usr/local/lib /usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed /usr/include/x86_64-linux-gnu /usr/lib /lib/x86_64-linux-gnu /lib/../lib /usr/lib/x86_64-linux-gnu /usr/lib/../lib /lib
+    libs=-lnsl -ldl -lm -lcrypt -lutil -lc
+    perllibs=-lnsl -ldl -lm -lcrypt -lutil -lc
+    libc=libc-2.19.so, so=so, useshrplib=false, libperl=libperl.a
+    gnulibc_version='2.19'
+  Dynamic Linking:
+    dlsrc=dl_dlopen.xs, dlext=so, d_dlsymun=undef, ccdlflags='-Wl,-E'
+    cccdlflags='-fPIC', lddlflags='-shared -O2 -g -L/usr/local/lib -fstack-protector'
+
+
+Characteristics of this binary (from libperl): 
+  Compile-time options: HAS_TIMES PERLIO_LAYERS PERL_DONT_CREATE_GVSV
+                        PERL_HASH_FUNC_ONE_AT_A_TIME_HARD PERL_MALLOC_WRAP
+                        PERL_NEW_COPY_ON_WRITE PERL_PRESERVE_IVUV
+                        PERL_USE_DEVEL USE_64_BIT_ALL USE_64_BIT_INT
+                        USE_LARGE_FILES USE_LOCALE USE_LOCALE_COLLATE
+                        USE_LOCALE_CTYPE USE_LOCALE_NUMERIC USE_PERLIO
+                        USE_PERL_ATOF
+  Locally applied patches:
+	Devel::PatchPerl 1.30
+  Built under linux
+  Compiled at May 14 2015 23:50:16
+  @INC:
+    /home/skaji/env/plenv/versions/5.20.2-DDEBUGGING-g/lib/perl5/site_perl/5.20.2/x86_64-linux
+    /home/skaji/env/plenv/versions/5.20.2-DDEBUGGING-g/lib/perl5/site_perl/5.20.2
+    /home/skaji/env/plenv/versions/5.20.2-DDEBUGGING-g/lib/perl5/5.20.2/x86_64-linux
+    /home/skaji/env/plenv/versions/5.20.2-DDEBUGGING-g/lib/perl5/5.20.2
+    .
+
+===> gdb --batch -p 16720 -x gdb-command.txt
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+__lll_lock_wait_private () at ../nptl/sysdeps/unix/sysv/linux/x86_64/lowlevellock.S:95
+#0  __lll_lock_wait_private () at ../nptl/sysdeps/unix/sysv/linux/x86_64/lowlevellock.S:95
+No locals.
+#1  0x00007f68bb603dca in _L_lock_12779 () from /lib/x86_64-linux-gnu/libc.so.6
+No symbol table info available.
+#2  0x00007f68bb6017a5 in __GI___libc_malloc (bytes=4080) at malloc.c:2887
+        ar_ptr = 0x7f68bb93d760 <main_arena>
+        victim = 0xde73b0
+        __func__ = "__libc_malloc"
+#3  0x0000000000484b25 in Perl_safesysmalloc (size=size@entry=4080) at util.c:130
+        ptr = <optimized out>
+#4  0x00000000004a6fee in S_more_sv () at sv.c:312
+        sv = 0xfffffffffffffe00
+        chunk = <optimized out>
+#5  0x00000000004b7c9a in Perl_newSVsv (old=0x80) at sv.c:9322
+        sv = 0x0
+#6  0x00000000004901d3 in Perl_sighandler (sig=14, sip=0x7fffad4cf4f0, uap=0x7fffad4cf3c0) at mg.c:3216
+        sp = <optimized out>
+        gv = 0x0
+        sv = 0x1057748
+        tSv = 0x0
+        cv = 0xe12f10
+        myop = 0x1003318
+        flags = 8
+        tXpv = 0x0
+        old_ss_ix = 283
+        errsv_save = 0x0
+#7  <signal handler called>
+No locals.
+#8  _int_malloc (av=0x7f68bb93d760 <main_arena>, bytes=4080) at malloc.c:3740
+        p = <optimized out>
+        iters = <optimized out>
+        nb = 4096
+        idx = <optimized out>
+        bin = <optimized out>
+        victim = 0x108a870
+        size = 8736
+        victim_index = <optimized out>
+        remainder = 0x108b870
+        remainder_size = 4640
+        block = <optimized out>
+        bit = <optimized out>
+        map = <optimized out>
+        fwd = <optimized out>
+        bck = 0x7f68bb93d7b8 <main_arena+88>
+        errstr = 0x0
+        __func__ = "_int_malloc"
+#9  0x00007f68bb6017b0 in __GI___libc_malloc (bytes=4080) at malloc.c:2891
+        ar_ptr = 0x7f68bb93d760 <main_arena>
+        victim = 0x1221
+        __func__ = "__libc_malloc"
+#10 0x0000000000484b25 in Perl_safesysmalloc (size=size@entry=4080) at util.c:130
+        ptr = <optimized out>
+#11 0x00000000004a6fee in S_more_sv () at sv.c:312
+        sv = 0x108b870
+        chunk = <optimized out>
+#12 0x00000000004b7031 in Perl_sv_mortalcopy_flags (oldstr=0x1052de0, flags=flags@entry=1538) at sv.c:8837
+        sv = <optimized out>
+#13 0x00000000004a567f in Perl_pp_entersub () at pp_hot.c:2711
+        av = <optimized out>
+        items = <optimized out>
+        defavp = <optimized out>
+        mark = 0x1004520
+        padlist = <optimized out>
+        depth = 27
+        sp = 0xddcb80
+        sv = 0xf31270
+        gv = 0xddcb80
+        cv = 0x1088a50
+        cx = 0xdde220
+        gimme = <optimized out>
+        hasargs = <optimized out>
+#14 0x000000000049e923 in Perl_runops_standard () at run.c:42
+        op = <optimized out>
+#15 0x000000000043b5f8 in S_run_body (oldscope=1) at perl.c:2456
+No locals.
+#16 perl_run (my_perl=<optimized out>) at perl.c:2372
+        oldscope = 1
+        ret = <optimized out>
+        cur_env = {je_prev = 0x781b40 <PL_start_env>, je_buf = {{__jmpbuf = {0, 7548056479371165937, 4317156, 140736100892032, 0, 0, -7548226516977385231, 7548057057550991601}, __mask_was_saved = 0, __saved_mask = {__val = {1, 14524312, 13, 4316929, 148565664, 0, 0, 4906770, 0, 4317156, 0, 4611431, 0, 0, 0, 4317156}}}}, je_ret = 0, je_mustcatch = false}
+#17 0x000000000041dfd5 in main (argc=2, argv=0x7fffad4cfd88, env=0x7fffad4cfda0) at perlmain.c:114
+        exitstatus = <optimized out>
+        i = <optimized out>
